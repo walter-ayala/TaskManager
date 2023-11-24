@@ -1,19 +1,49 @@
 import styled from 'styled-components'
-import { dataTasks } from '../../dummyData'
+import useTasks from '../../hooks/Dashboard/useTasks'
+import { type TaskList } from '../../types'
+import Spinner from '../Common/Spinner'
 import TaskCard from './TaskCard'
 
 const Tasks: React.FC = () => {
+  const { tasks, loading, error } = useTasks()
+
+  if (loading) {
+    return (
+      <SmallContainer>
+      <Spinner>
+        <Title>Loading tasks</Title>
+      </Spinner>
+      </SmallContainer>
+    )
+  }
+
+  if (error != null) {
+    return (
+      <SmallContainer>
+        <Title>An error occured {error.message}</Title>
+      </SmallContainer>
+    )
+  }
+
+  if (tasks?.length === 0) {
+    return (
+      <SmallContainer>
+       <Title>No Tasks found</Title>
+      </SmallContainer>
+    )
+  }
+
   return (
     <Container>
-      {dataTasks.map((typeTask) => (
-        <TaskList key={typeTask.name}>
-          <TitleTask>{`${typeTask.name} (${typeTask.values.length})`}</TitleTask>
+      {tasks.map((typeTask: TaskList) => (
+        <TaskColumn key={typeTask.title}>
+          <Title>{`${typeTask.title} (${typeTask.values.length})`}</Title>
           {
             typeTask.values.map((task) => (
-                <TaskCard key={task.id} task={task}/>
+              <TaskCard key={task.id} task={task} />
             ))
           }
-        </TaskList>
+        </TaskColumn>
       ))}
     </Container>
   )
@@ -48,7 +78,17 @@ const Container = styled.div`
   }
 `
 
-const TaskList = styled.div`
+const SmallContainer = styled.div`
+  display: flex;
+  margin: 10px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  height: 300px;
+  background-color: ${(props) => props.theme.backgroundLight};
+`
+
+const TaskColumn = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -56,7 +96,7 @@ const TaskList = styled.div`
   min-width: 348px;
 `
 
-const TitleTask = styled.p`
+const Title = styled.p`
   font-style: normal;
   font-weight: 600;
   font-size: 18px;

@@ -7,6 +7,11 @@ export interface Tags {
   name: string
 }
 
+export interface TimerStyles {
+  bgcolor: string
+  textcolor: string
+}
+
 export interface WeightText {
   normalWeight?: boolean
 }
@@ -33,4 +38,9 @@ export interface Task {
   position: number
   status: string
   tags: string[]
+}
+
+export interface TaskList {
+  title: string
+  values: Task[]
 }

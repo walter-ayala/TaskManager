@@ -1,20 +1,27 @@
 import { DateTime } from 'luxon'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import BranchIcon from '../../assets/icons/BranchIcon'
 import Clock from '../../assets/icons/Clock'
 import CommentIcon from '../../assets/icons/CommentIcon'
 import PaperClipIcon from '../../assets/icons/PaperClipIcon'
-import ProfileAvatar from '../../assets/images/ProfileAvatar.png'
+import { type TimerStyles, type Task, type WeightText } from '../../types'
+import compareDates from '../../utils/compareDates'
 import OptionsMenu from './OptionsMenu'
 import Tag from './Tag'
-import { type WeightText, type Task } from '../../types'
 
 interface Props {
   task: Task
 }
 
 const TaskCard: React.FC<Props> = ({ task }) => {
-  const duedate = DateTime.fromISO(task.dueDate).toFormat('dd LLL, yyyy')
+  const [dueDateInformation, setDueDateInformation] = useState({ backgroundColor: '', textColor: '', dueDateText: DateTime.fromISO(task.dueDate).toFormat('dd LLL, yyyy') })
+
+  useEffect(() => {
+    const timerProps = compareDates(dueDateInformation.dueDateText)
+    setDueDateInformation(timerProps)
+  }, [])
+
   return (
     <Container>
       <RowContainer>
@@ -23,22 +30,24 @@ const TaskCard: React.FC<Props> = ({ task }) => {
       </RowContainer>
       <RowContainer>
         <InformationTask>{task.pointEstimate} points</InformationTask>
-        <RowContainer>
-          <Clock />
-          <InformationTask>
-            {duedate}
-          </InformationTask>
-        </RowContainer>
+        {dueDateInformation.backgroundColor.length > 1 &&
+          <Timer bgcolor={dueDateInformation.backgroundColor} textcolor={dueDateInformation.textColor}>
+            <Clock />
+            <InformationTask>
+              {dueDateInformation.dueDateText}
+            </InformationTask>
+          </Timer>
+        }
       </RowContainer>
       <TagsContainer>
         {
           task.tags.map((tag: string, index: number) => (
-            <Tag key={tag} name={tag} first={index === 0} />
+            <Tag key={index} name={tag} first={index === 0} />
           ))
         }
       </TagsContainer>
       <RowContainer>
-        <img src={ProfileAvatar} alt="profileAvatar" width={32} height={32} />
+        <img src={task.assignee.avatar} alt="profileAvatar" width={32} height={32} style={{ borderRadius: '50%' }} />
         <IconsSection>
           <PaperClipIcon />
           <InformationTask normalWeight>
@@ -102,6 +111,20 @@ const InformationTask = styled.div<WeightText>`
   line-height: 24px;
   letter-spacing: 0.75px;
   margin-left: 5px;
+`
+
+const Timer = styled.div<TimerStyles>`
+  display: flex;
+  flex-direction: row;
+  border-radius: 4px;
+  padding: 4px 16px 4px 16px;
+  gap: 8px;
+  background-color: ${(props) => props.bgcolor};
+  & > *,
+  & {
+    color: ${(props) => props.textcolor};
+    fill: ${(props) => props.textcolor};
+  }
 `
 
 export default TaskCard
