@@ -19,7 +19,8 @@ module.exports = {
     ],
     "rules": {
         'react/prop-types': 'off',
-        'react/react-in-jsx-scope': 'off'
+        'react/react-in-jsx-scope': 'off',
+        '@typescript-eslint/explicit-function-return-type': 'off'
     },
     "ignorePatterns": [".eslintrc.cjs", "vite.config.ts"],
 }
