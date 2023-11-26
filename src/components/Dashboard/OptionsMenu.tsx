@@ -27,7 +27,7 @@ const OptionsContainer = styled.div`
   padding: 10px 2px;
 `
 
-const Menu = styled.div`
+export const Menu = styled.div`
   position: absolute;
   z-index: 10;
   width: 138px;

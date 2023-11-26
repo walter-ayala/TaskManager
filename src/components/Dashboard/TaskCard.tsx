@@ -9,6 +9,8 @@ import { type TimerStyles, type Task, type WeightText } from '../../types'
 import compareDates from '../../utils/compareDates'
 import OptionsMenu from './OptionsMenu'
 import Tag from './Tag'
+import ProfileAvatar from '../../assets/images/ProfileAvatar.png'
+import { pointEstimate } from '../../constants'
 
 interface Props {
   task: Task
@@ -29,9 +31,9 @@ const TaskCard: React.FC<Props> = ({ task }) => {
         <OptionsMenu />
       </RowContainer>
       <RowContainer>
-        <InformationTask>{task.pointEstimate} points</InformationTask>
+        <InformationTask>{pointEstimate[task.pointEstimate as keyof typeof pointEstimate]} points</InformationTask>
         {dueDateInformation.backgroundColor.length > 1 &&
-          <Timer bgcolor={dueDateInformation.backgroundColor} textcolor={dueDateInformation.textColor}>
+          <Timer $bgcolor={dueDateInformation.backgroundColor} $textcolor={dueDateInformation.textColor}>
             <Clock />
             <InformationTask>
               {dueDateInformation.dueDateText}
@@ -42,19 +44,19 @@ const TaskCard: React.FC<Props> = ({ task }) => {
       <TagsContainer>
         {
           task.tags.map((tag: string, index: number) => (
-            <Tag key={index} name={tag} first={index === 0} />
+            <Tag key={index} name={tag} isfirst={index === 0} />
           ))
         }
       </TagsContainer>
       <RowContainer>
-        <img src={task.assignee.avatar} alt="profileAvatar" width={32} height={32} style={{ borderRadius: '50%' }} />
+        <img src={task.assignee.avatar ?? ProfileAvatar} alt="profileAvatar" width={32} height={32} style={{ borderRadius: '50%' }} />
         <IconsSection>
           <PaperClipIcon />
-          <InformationTask normalWeight>
+          <InformationTask $normalweight>
             5
           </InformationTask>
           <BranchIcon />
-          <InformationTask normalWeight>
+          <InformationTask $normalweight>
             3
           </InformationTask>
           <CommentIcon />
@@ -106,7 +108,7 @@ const TitleTask = styled.p`
 
 const InformationTask = styled.div<WeightText>`
   color: white;
-  font-weight: ${(props) => ((props.normalWeight ?? false) ? 400 : 600)};
+  font-weight: ${(props) => ((props.$normalweight ?? false) ? 400 : 600)};
   font-size: 15px;
   line-height: 24px;
   letter-spacing: 0.75px;
@@ -119,11 +121,12 @@ const Timer = styled.div<TimerStyles>`
   border-radius: 4px;
   padding: 4px 16px 4px 16px;
   gap: 8px;
-  background-color: ${(props) => props.bgcolor};
+  background-color: ${(props) => props.$bgcolor};
   & > *,
   & {
-    color: ${(props) => props.textcolor};
-    fill: ${(props) => props.textcolor};
+    color: ${(props) => props.$textcolor};
+    fill: ${(props) => props.$textcolor};
+    text-transform: uppercase;
   }
 `
 

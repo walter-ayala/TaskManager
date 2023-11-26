@@ -8,6 +8,7 @@ const theme = {
   neutral: '#94979A',
   backgroundLight: '#2C2F33',
   backgroundDark: '#222528',
+  backgroundModal: '#393D41',
   white: '#FFF'
 }
 
