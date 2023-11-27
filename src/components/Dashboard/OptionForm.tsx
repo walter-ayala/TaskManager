@@ -4,8 +4,8 @@ import ProfileAvatar from '../../assets/images/ProfileAvatar.png'
 import { type Options, type MenuForm, type OptionSelected } from '../../types'
 import { useState } from 'react'
 
-const OptionForm: React.FC<MenuForm> = ({ icon, title, titleModal, options, onChange, valueSelected, loading = false, multipleSelect = false }) => {
-  const [labelSelected, setLabelSelected] = useState('')
+const OptionForm: React.FC<MenuForm> = ({ icon, title, titleModal, options, onChange, valueSelected, loading = false, multipleSelect = false, valueToShow = '' }) => {
+  const [labelSelected, setLabelSelected] = useState(valueToShow)
 
   const onHandleClick = (value: Options) => {
     if (!multipleSelect) setLabelSelected(value.label ?? '')
@@ -53,7 +53,7 @@ const OptionForm: React.FC<MenuForm> = ({ icon, title, titleModal, options, onCh
         {icon}
         <OptionTitle>{!multipleSelect && labelSelected !== '' ? labelSelected : title}</OptionTitle>
         <TagMenu>
-          <OptionText>{titleModal}</OptionText>
+          <OptionText>{!loading && titleModal}</OptionText>
           {modalBody}
         </TagMenu>
       </OptionContainer>

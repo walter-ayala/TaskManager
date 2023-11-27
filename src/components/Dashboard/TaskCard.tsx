@@ -28,10 +28,10 @@ const TaskCard: React.FC<Props> = ({ task }) => {
     <Container>
       <RowContainer>
         <TitleTask>{task.name}</TitleTask>
-        <OptionsMenu />
+        <OptionsMenu task={task}/>
       </RowContainer>
       <RowContainer>
-        <InformationTask>{pointEstimate[task.pointEstimate as keyof typeof pointEstimate]} points</InformationTask>
+        <InformationTask>{pointEstimate[task.pointEstimate as keyof typeof pointEstimate]}</InformationTask>
         {dueDateInformation.backgroundColor.length > 1 &&
           <Timer $bgcolor={dueDateInformation.backgroundColor} $textcolor={dueDateInformation.textColor}>
             <Clock />

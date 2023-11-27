@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import CustomModal from '../Common/CustomModal'
 import TopBar from '../Common/TopBar'
-import FormAddTask from './FormAddTask'
+import TaskForm from './TaskForm'
 import Tasks from './Tasks'
 
 const DashboardSection: React.FC = () => {
@@ -16,7 +16,7 @@ const DashboardSection: React.FC = () => {
       <TopBar openModal={toggleModal} />
       <Tasks />
       <CustomModal isOpen={isOpenModal} toggleModal={toggleModal}>
-        <FormAddTask toggleModal={toggleModal}/>
+        <TaskForm toggleModal={toggleModal}/>
       </CustomModal>
     </div>
   )

@@ -4,7 +4,7 @@ import DueDateIcon from '../../assets/icons/DueDateIcon'
 import EstimateIcon from '../../assets/icons/EstimateIcon'
 import LabelIcon from '../../assets/icons/LabelIcon'
 import TaskIcon from '../../assets/icons/TaskIcon'
-import { estimateList, labelList, statusList } from '../../constants'
+import { estimateList, labelList, pointEstimate, statusLabel, statusList } from '../../constants'
 import OptionForm from './OptionForm'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
@@ -14,7 +14,7 @@ import { type Modals } from '../../types'
 import CustomButton from '../Common/CustomButton'
 import './datepicker.css'
 
-const FormAddTask: React.FC<Partial<Modals>> = ({ toggleModal = () => { } }) => {
+const TaskForm: React.FC<Partial<Modals>> = ({ toggleModal = () => { }, task = null }) => {
   const {
     form,
     users,
@@ -22,15 +22,16 @@ const FormAddTask: React.FC<Partial<Modals>> = ({ toggleModal = () => { } }) => 
     onChangeForm,
     createTask,
     formValid,
-    loadingCreateTask,
-    errorCreateTask
-  } = useForm(toggleModal)
+    loadingMutation,
+    errorMutation
+  } = useForm(toggleModal, task)
 
   return (
     <Container>
       <Input
         placeholder="Task Title"
         name="name"
+        value={form.name}
         onChange={(e: { target: { value: string | Date | string[] } }) => { onChangeForm('name', e.target.value) }}
       />
       <OptionsContainer>
@@ -41,6 +42,7 @@ const FormAddTask: React.FC<Partial<Modals>> = ({ toggleModal = () => { } }) => 
           options={estimateList}
           onChange={(value: string) => { onChangeForm('pointEstimate', value) }}
           valueSelected={form.pointEstimate}
+          {...{ valueToShow: pointEstimate[task?.pointEstimate as keyof typeof pointEstimate] }}
         />
         <OptionForm
           icon={<AssigneeIcon />}
@@ -50,6 +52,7 @@ const FormAddTask: React.FC<Partial<Modals>> = ({ toggleModal = () => { } }) => 
           loading={loading}
           onChange={(value: string) => { onChangeForm('assigneeId', value) }}
           valueSelected={form.assigneeId}
+          {...{ valueToShow: task?.assignee.fullName }}
         />
         <OptionForm
           icon={<LabelIcon />}
@@ -75,6 +78,7 @@ const FormAddTask: React.FC<Partial<Modals>> = ({ toggleModal = () => { } }) => 
           options={statusList}
           onChange={(value: string) => { onChangeForm('status', value) }}
           valueSelected={form.status}
+          {...{ valueToShow: statusLabel[task?.status as keyof typeof statusLabel] }}
         />
         <ContainerCalendar>
           <DatePicker
@@ -92,11 +96,11 @@ const FormAddTask: React.FC<Partial<Modals>> = ({ toggleModal = () => { } }) => 
         </ContainerCalendar>
       </OptionsContainer>
       <div>
-        {loadingCreateTask && (
+        {loadingMutation && (
             <TextComponent>Loading, please wait...</TextComponent>
         )}
-        {(errorCreateTask != null) && (
-            <TextComponent>An error occured, {errorCreateTask.message}, try again</TextComponent>
+        {(errorMutation != null) && (
+            <TextComponent>An error occured, {errorMutation.message}, try again</TextComponent>
         )}
         {!formValid && (
             <TextComponent>Please complete all the information</TextComponent>
@@ -107,7 +111,7 @@ const FormAddTask: React.FC<Partial<Modals>> = ({ toggleModal = () => { } }) => 
           <TextComponent>Cancel</TextComponent>
         </CustomButton>
         <CustomButton main onClick={createTask}>
-          <TextComponent>Create</TextComponent>
+          <TextComponent>{task ? 'Update' : 'Create'}</TextComponent>
         </CustomButton>
       </ButtonsContainer>
     </Container>
@@ -195,4 +199,5 @@ const TextComponent = styled.p`
   margin: 0;
 `
 
-export default FormAddTask
+export default TaskForm
+

@@ -21,6 +21,7 @@ export interface Modals {
   isOpen: boolean
   toggleModal: () => void
   children: JSX.Element
+  task?: Task
 }
 
 export interface Form {
@@ -47,6 +48,7 @@ export interface MenuForm {
   onChange: (value: string) => void
   multipleSelect?: boolean
   valueSelected: string | string[]
+  valueToShow?: string
 }
 
 export interface TimerStyles {
@@ -85,4 +87,24 @@ export interface Task {
 export interface TaskList {
   title: string
   values: Task[]
+}
+
+export interface DeleteModal {
+  toggleModal: () => void
+  onDeleteTask: () => void
+  loadingDeleteTask: boolean
+  errorDeleteTask: GraphQLError
+}
+
+export interface IOptionsMenu {
+  task: Task
+}
+
+export interface IForm {
+  assigneeId: string
+  dueDate: Date
+  name: string
+  pointEstimate: string
+  status: string
+  tags: string[]
 }

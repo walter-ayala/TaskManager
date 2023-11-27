@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { useMutation, useQuery } from '@apollo/client'
 import { useEffect, useState } from 'react'
 import { CREATE_TASK } from '../../api/Dashboard/mutation/createTask'
+import { UPDATE_TASK } from '../../api/Dashboard/mutation/updateTask'
 import { GET_TASKS } from '../../api/Dashboard/query/getTasks'
 import { GET_USERS } from '../../api/Dashboard/query/getUsers'
-import { type User } from '../../types'
+import { type IForm, type Task, type User } from '../../types'
 
 const initialValues = {
   assigneeId: '',
@@ -14,15 +16,23 @@ const initialValues = {
   tags: []
 }
 
-const useForm = (toggleModal: () => void) => {
-  const [form, setForm] = useState(initialValues)
+const useForm = (toggleModal: () => void, task: Task | null) => {
+  const [form, setForm] = useState<IForm>(initialValues)
   const [users, setUsers] = useState<User[]>()
   const [formValid, setFormValid] = useState(true)
 
   const { loading, data } = useQuery(GET_USERS)
 
-  const [addTodo, { loading: loadingCreateTask, error: errorCreateTask }] = useMutation(CREATE_TASK, {
+  const [addTask, { loading: loadingCreateTask, error: errorCreateTask }] = useMutation(CREATE_TASK, {
     variables: form,
+    onCompleted () {
+      toggleModal()
+    },
+    refetchQueries: [{ query: GET_TASKS }, 'GetTasks']
+  })
+
+  const [updateTask, { loading: loadingUpdateTask, error: errorUpdateTask }] = useMutation(UPDATE_TASK, {
+    variables: { ...form, id: task?.id },
     onCompleted () {
       toggleModal()
     },
@@ -57,9 +67,23 @@ const useForm = (toggleModal: () => void) => {
 
   const createTask = async () => {
     if (!validateValues()) return
-
-    await addTodo()
+    if (task) return await updateTask()
+    await addTask()
   }
+
+  useEffect(() => {
+    if (task) {
+      console.log(task)
+      setForm({
+        assigneeId: task.assignee.id,
+        dueDate: new Date(task.dueDate),
+        name: task.name,
+        pointEstimate: task.pointEstimate,
+        status: task.status,
+        tags: task.tags
+      })
+    }
+  }, [task])
 
   return {
     form,
@@ -68,8 +92,8 @@ const useForm = (toggleModal: () => void) => {
     onChangeForm,
     createTask,
     formValid,
-    loadingCreateTask,
-    errorCreateTask
+    loadingMutation: loadingCreateTask || loadingUpdateTask,
+    errorMutation: errorCreateTask || errorUpdateTask
   }
 }
 

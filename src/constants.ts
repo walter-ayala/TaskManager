@@ -7,11 +7,19 @@ export const estimateList = [
 ]
 
 export const pointEstimate = {
-  EIGHT: '8',
-  FOUR: '4',
-  ONE: '1',
-  TWO: '2',
-  ZERO: '0'
+  EIGHT: '8 points',
+  FOUR: '4 points',
+  ONE: '1 points',
+  TWO: '2 points',
+  ZERO: '0 points'
+}
+
+export const statusLabel = {
+  BACKLOG: 'Backlog',
+  TODO: 'ToDo',
+  DONE: 'Done',
+  CANCELLED: 'Cancelled',
+  IN_PROGRESS: 'In Progess'
 }
 
 export const labelList = [
