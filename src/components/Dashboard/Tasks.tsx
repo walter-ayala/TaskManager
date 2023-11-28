@@ -54,13 +54,17 @@ const Container = styled.div`
   grid-column-gap: 32px;
   grid-row-gap: 16px;
   align-items: flex-start;
-  margin: 10px;
+  margin: 10px 10px 10px 0px;
   overflow-y: auto;
   height: 75vh;
   overflow-x: auto;
   width: calc(100vw - 84px);
-  @media only screen and (min-width: 769px) {
+  @media only screen and (max-width: 850px) {
+    margin-bottom: 100px;
+  }
+  @media only screen and (min-width: 850px) {
     width: calc(100vw - 348px);
+
   }
   ::-webkit-scrollbar {
     height: 0px;
@@ -80,7 +84,7 @@ const Container = styled.div`
 
 const SmallContainer = styled.div`
   display: flex;
-  margin: 10px;
+  margin: 10px 10px 10px 0px;
   justify-content: center;
   align-items: center;
   border-radius: 8px;

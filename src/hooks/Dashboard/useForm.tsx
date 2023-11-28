@@ -73,7 +73,6 @@ const useForm = (toggleModal: () => void, task: Task | null) => {
 
   useEffect(() => {
     if (task) {
-      console.log(task)
       setForm({
         assigneeId: task.assignee.id,
         dueDate: new Date(task.dueDate),

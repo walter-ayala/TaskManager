@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import DashboardIcon from '../../assets/icons/DashboardIcon'
 import RavnLogo from '../../assets/icons/RavnLogo'
+import SettingsIcon from '../../assets/icons/SettingsIcon'
 import { type OptionSelected } from '../../types'
 
 const SideBar: React.FC = () => {
@@ -17,6 +18,10 @@ const SideBar: React.FC = () => {
           <DashboardIcon />
           <TitleTab>DASHBOARD</TitleTab>
         </Tab>
+        <Tab to={'/settings'} selected={location.pathname === '/settings'}>
+          <SettingsIcon />
+          <TitleTab>SETTINGS</TitleTab>
+        </Tab>
       </div>
     </Container>
   )
@@ -28,7 +33,7 @@ const Container = styled.div`
   min-width: 232px;
   min-height: 800px;
   padding-top: 14px;
-  @media only screen and (max-width: 769px) {
+  @media only screen and (max-width: 850px) {
     display: none;
   }
 `

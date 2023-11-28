@@ -31,7 +31,9 @@ const TaskForm: React.FC<Partial<Modals>> = ({ toggleModal = () => { }, task = n
       <Input
         placeholder="Task Title"
         name="name"
+        id="name"
         value={form.name}
+        type="text"
         onChange={(e: { target: { value: string | Date | string[] } }) => { onChangeForm('name', e.target.value) }}
       />
       <OptionsContainer>
@@ -200,4 +202,3 @@ const TextComponent = styled.p`
 `
 
 export default TaskForm
-
