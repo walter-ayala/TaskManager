@@ -90,6 +90,10 @@ export interface TaskList {
   values: Task[]
 }
 
+export interface TaskResponse {
+  tasks: Task[] | []
+}
+
 export interface DeleteModal {
   toggleModal: () => void
   onDeleteTask: () => void

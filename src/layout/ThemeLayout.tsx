@@ -1,4 +1,5 @@
 import React from 'react'
+import { Toaster } from 'react-hot-toast'
 import { ThemeProvider } from 'styled-components'
 
 const theme = {
@@ -16,6 +17,10 @@ interface Props {
   children: JSX.Element
 }
 
-const ThemeLayout: React.FC<Props> = ({ children }) => <ThemeProvider theme={theme}>{children}</ThemeProvider>
+const ThemeLayout: React.FC<Props> = ({ children }) =>
+<ThemeProvider theme={theme}>
+  <Toaster />
+  {children}
+</ThemeProvider>
 
 export default ThemeLayout

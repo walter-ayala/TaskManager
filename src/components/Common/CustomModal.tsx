@@ -28,7 +28,7 @@ const CustomModal: React.FC<Modals> = ({ isOpen, toggleModal, children }) => {
       isOpen={isOpen}
       style={modalStyles}
       onRequestClose={toggleModal}
-      closeTimeoutMS={1000}
+      closeTimeoutMS={500}
     >
       <StyledModal>
         {children}
