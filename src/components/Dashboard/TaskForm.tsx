@@ -109,10 +109,10 @@ const TaskForm: React.FC<Partial<Modals>> = ({ toggleModal = () => { }, task = n
         )}
       </div>
       <ButtonsContainer>
-        <CustomButton onClick={toggleModal}>
+        <CustomButton isDisabled={loadingMutation} onClick={toggleModal}>
           <TextComponent>Cancel</TextComponent>
         </CustomButton>
-        <CustomButton main onClick={createTask}>
+        <CustomButton isDisabled={loadingMutation} main onClick={createTask}>
           <TextComponent>{task ? 'Update' : 'Create'}</TextComponent>
         </CustomButton>
       </ButtonsContainer>

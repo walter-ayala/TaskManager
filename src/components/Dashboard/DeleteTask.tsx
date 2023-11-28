@@ -11,10 +11,10 @@ const DeleteTask: React.FC<DeleteModal> = ({ toggleModal = () => { }, onDeleteTa
       </HeaderContainer>
       <div>
         <ButtonsContainer>
-          <CustomButton onClick={toggleModal}>
+          <CustomButton isDisabled={loadingDeleteTask} onClick={toggleModal}>
             <Message>Cancel</Message>
           </CustomButton>
-          <CustomButton main onClick={onDeleteTask}>
+          <CustomButton isDisabled={loadingDeleteTask} main onClick={onDeleteTask}>
             <Message>Delete</Message>
           </CustomButton>
         </ButtonsContainer>

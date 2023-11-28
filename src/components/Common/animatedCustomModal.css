@@ -1,0 +1,15 @@
+.ReactModal__Content--before-close {
+  animation: closeModal 1s ease-in;
+}
+
+@keyframes closeModal {
+	0% {
+		opacity: 1;
+		transform: scale(1) translate(-50%, -50%);
+	}
+
+	100% {
+		opacity: 0;
+		transform: scale(0.6) translate(-80%, -80%);
+	}
+}

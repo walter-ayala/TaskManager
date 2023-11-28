@@ -2,9 +2,9 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { type ButtonComponent } from '../../types'
 
-const CustomButton: React.FC<ButtonComponent> = ({ main, children, onClick }) => {
+const CustomButton: React.FC<ButtonComponent> = ({ main, children, onClick, isDisabled }) => {
   return (
-    <Container $main={main} onClick={onClick}>
+    <Container disabled={isDisabled} $main={main} onClick={onClick}>
       {children}
     </Container>
   )

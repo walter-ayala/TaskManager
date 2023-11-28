@@ -6,6 +6,7 @@ import { UPDATE_TASK } from '../../api/Dashboard/mutation/updateTask'
 import { GET_TASKS } from '../../api/Dashboard/query/getTasks'
 import { GET_USERS } from '../../api/Dashboard/query/getUsers'
 import { type IForm, type Task, type User } from '../../types'
+import confetti from 'canvas-confetti'
 
 const initialValues = {
   assigneeId: '',
@@ -27,6 +28,11 @@ const useForm = (toggleModal: () => void, task: Task | null) => {
     variables: form,
     onCompleted () {
       toggleModal()
+      void confetti({
+        particleCount: 100,
+        startVelocity: 30,
+        spread: 360
+      })
     },
     refetchQueries: [{ query: GET_TASKS }, 'GetTasks']
   })

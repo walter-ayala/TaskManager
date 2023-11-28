@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.8.7",
+    "@types/canvas-confetti": "^1.6.4",
+    "canvas-confetti": "^1.9.2",
     "graphql": "^16.8.1",
     "luxon": "^3.4.4",
     "react": "^18.2.0",

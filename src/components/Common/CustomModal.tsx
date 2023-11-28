@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { type Modals } from '../../types'
 import Modal from 'react-modal'
+import './animatedCustomModal.css'
 
 const modalStyles = {
   content: {
@@ -27,6 +28,7 @@ const CustomModal: React.FC<Modals> = ({ isOpen, toggleModal, children }) => {
       isOpen={isOpen}
       style={modalStyles}
       onRequestClose={toggleModal}
+      closeTimeoutMS={1000}
     >
       <StyledModal>
         {children}

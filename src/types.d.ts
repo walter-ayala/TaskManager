@@ -11,6 +11,7 @@ export interface ButtonComponent {
   onClick: () => void
   children: JSX.Element
   main?: boolean
+  isDisabled?: boolean
 }
 
 export interface TopOptions {
