@@ -9,7 +9,7 @@ Currently, two official plugins are available:
 
 # Task manager
 
-A React project about a task manager allows you to browse, add, update adn delete tasks to users and watch your profile information.
+A React project about a task manager allows you to browse, add, update and delete tasks to users and watch your profile information.
 I implemented luxon, styled-components, graphql with Apollo client and also i used Standard with TypeScript.
 
 I chose that folder structure because I consider that it facilitates the classification and search of files, 
@@ -33,6 +33,66 @@ Open http://localhost:5173/
 - "react-datepicker":  A Datepicker component that enable select a date in an intuitive way for the user
 - "styled-components": For write CSS code to style the components
 - "canvas-confetti": For show a cool animation when a new task is added to the board
+- "react-hot-toast": For show if task was deleted or not
+
+# Bonus points
+
+- Add animation when a new task is added to the board
+- Optimistic delete mutation
+
 
 # Screenshots
+
+Loading tasks
+
+<img width="1792" alt="image" src="https://github.com/walter-ayala/TaskManager/assets/37197108/75e688f7-c4a8-4776-908f-3606d5e5baa7">
+
+
+Dashboard page
+
+<img width="1627" alt="image" src="https://github.com/walter-ayala/TaskManager/assets/37197108/da77e522-1883-4b11-9252-b0da21ce6e8e">
+
+
+Dashboard mobile view
+
+<img width="753" alt="image" src="https://github.com/walter-ayala/TaskManager/assets/37197108/36fbfbee-5427-48e6-a8e7-b68d50aa9e1f">
+
+
+Modal for add task
+
+<img width="1695" alt="image" src="https://github.com/walter-ayala/TaskManager/assets/37197108/bda125d8-94c5-4b18-9e4d-45f72ce613cc">
+
+
+Animation when a new task is added to the board
+
+<img width="1687" alt="image" src="https://github.com/walter-ayala/TaskManager/assets/37197108/d3a4234b-0388-4079-97bd-d67138d89b99">
+
+
+Modal for delete task
+
+<img width="1696" alt="image" src="https://github.com/walter-ayala/TaskManager/assets/37197108/6383f3f4-0896-48bf-9d91-f7bfd618eacc">
+
+
+Settings page
+
+<img width="1681" alt="image" src="https://github.com/walter-ayala/TaskManager/assets/37197108/1e615407-3e90-4a7e-9a95-285a341c7e79">
+
+
+Settings mobile view
+
+<img width="746" alt="image" src="https://github.com/walter-ayala/TaskManager/assets/37197108/8a7ed872-2e44-4d54-bacc-367abe8615f8">
+
+
+Modal for edit task in mobile version
+
+<img width="665" alt="image" src="https://github.com/walter-ayala/TaskManager/assets/37197108/50110372-f7d1-4454-96eb-94f4f9dbb40f">
+
+
+Optimistic delete task
+
+<img width="644" alt="image" src="https://github.com/walter-ayala/TaskManager/assets/37197108/0ba66352-7302-4374-b705-aee2c08201c4">
+
+
+
+
 
