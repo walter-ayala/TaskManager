@@ -20,9 +20,9 @@ const TaskCard: React.FC<Props> = ({ task }) => {
   const [dueDateInformation, setDueDateInformation] = useState({ backgroundColor: '', textColor: '', dueDateText: DateTime.fromISO(task.dueDate).toFormat('dd LLL, yyyy') })
 
   useEffect(() => {
-    const timerProps = compareDates(dueDateInformation.dueDateText)
+    const timerProps = compareDates(DateTime.fromISO(task.dueDate).toFormat('dd LLL, yyyy'))
     setDueDateInformation(timerProps)
-  }, [])
+  }, [task.dueDate])
 
   return (
     <Container>
